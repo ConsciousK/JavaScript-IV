@@ -44,6 +44,7 @@ class Humanoid extends CharacterStats {
     }
 }
 
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -93,8 +94,8 @@ class Humanoid extends CharacterStats {
     ],
     language: 'Elvish',
   });
-  
-  console.log(mage.createdAt); // Today's date
+
+  /*console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
   console.log(mage.name); // Bruce
@@ -104,9 +105,87 @@ class Humanoid extends CharacterStats {
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-  
+  */
   
     // Stretch task: 
     // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
     // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
     // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+class Villian extends Humanoid {
+  constructor(villianstats) {
+    super(villianstats);
+    this.voiddamage = villianstats.voiddamage;
+  }
+  villianattack() {
+    if (hero.healthPoints >= 0){
+      hero.healthPoints = hero.healthPoints - this.voiddamage;
+      console.log(hero.healthPoints);
+      console.log(`${hero.name} took ${this.voiddamage} points of Dark damage!!`);
+    } else {
+      console.log(`${this.name} has defeated ${hero.name}!!!!`);
+    }
+  }
+}
+  
+class Hero extends Humanoid {
+  constructor(herostats) {
+    super(herostats);
+    this.lightdamage = herostats.lightdamage;
+  }
+  heroattack() {
+    if (villian.healthPoints >= 0) {
+      console.log(villian.healthPoints);
+      villian.healthPoints = villian.healthPoints - this.lightdamage;
+      console.log(`${villian.name} took ${this.lightdamage} points of Light damage!!`);
+    } else {
+      console.log(`${this.name} has defeated ${villian.name}!!!!`);
+    }
+  }
+}
+ 
+const villian = new Villian({
+  createdAt: new Date(),
+  dimensions:  {
+    length: 2,
+    width:12,
+    height: 20,
+  },
+  healthPoints: 20,
+  voiddamage: 5,
+  name: 'VILLLLARN',
+  team: 'Underworld',
+  weapons: [
+    'Void Staff',
+  ],
+  language: 'Draconic',
+});
+  
+const hero = new Hero({
+  createdAt: new Date(),
+  dimensions:  {
+    length: 2,
+    width:12,
+    height: 20,
+  },
+  healthPoints: 20,
+  lightdamage: 5,
+  name: 'HEERARRR',
+  team: 'Overland',
+  weapons: [
+    'Light Sword',
+  ],
+  language: 'High Valerian',
+});
+
+hero.heroattack();
+villian.villianattack();
+hero.heroattack();
+villian.villianattack();
+hero.heroattack();
+villian.villianattack();
+hero.heroattack();
+villian.villianattack();
+hero.heroattack();
+villian.villianattack();
+hero.heroattack();
